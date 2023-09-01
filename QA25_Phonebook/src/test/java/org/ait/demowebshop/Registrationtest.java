@@ -11,41 +11,41 @@ public class Registrationtest extends TestBase {
     @BeforeMethod
     public void ensurePrecondition() {
         if (!isElementPresent(By.linkText("Log in"))) {
-            driver.findElement(By.linkText("Log out")).click();
+            click(By.linkText("Log out"));
         }
-        driver.findElement(By.linkText("Register")).click();
+        click(By.linkText("Register"));
     }
 
-    @AfterMethod(enabled = false)
+    @AfterMethod()
     public void tierDown() {
         super.tierDown();
     }
 
     @Test
-    public void registrationExistUserTest() {
-        driver.findElement(By.cssSelector("#FirstName")).click();
-        driver.findElement(By.cssSelector("#FirstName")).clear();
-        driver.findElement(By.cssSelector("#FirstName")).sendKeys("Ivan");
+    public void PositiveRegistrationdUserTest() {
+        int i = (int) (System.currentTimeMillis() / 1000 % 3000);
+        type("#FirstName", "Ivan");
+        type("#LastName", "Ivanov");
+        type("#Email", "qq" + i + "@qq.qq");
+        type("#Password", "Pass@1234");
+        type("#ConfirmPassword", "Pass@1234");
+        click(By.cssSelector("#register-button"));
 
-        driver.findElement(By.cssSelector("#LastName")).click();
-        driver.findElement(By.cssSelector("#LastName")).clear();
-        driver.findElement(By.cssSelector("#LastName")).sendKeys("Ivanov");
+        Assert.assertTrue(isElementPresent(By.xpath("//div[contains(text(),'Your registration completed')]")));
+    }
 
-        driver.findElement(By.cssSelector("#Email")).click();
-        driver.findElement(By.cssSelector("#Email")).clear();
-        driver.findElement(By.cssSelector("#Email")).sendKeys("qq123@qq.qq");
-
-        driver.findElement(By.cssSelector("#Password")).click();
-        driver.findElement(By.cssSelector("#Password")).clear();
-        driver.findElement(By.cssSelector("#Password")).sendKeys("Pass@1234");
-
-        driver.findElement(By.cssSelector("#ConfirmPassword")).click();
-        driver.findElement(By.cssSelector("#ConfirmPassword")).clear();
-        driver.findElement(By.cssSelector("#ConfirmPassword")).sendKeys("Pass@1234");
-
-        driver.findElement(By.cssSelector("#register-button")).click();
+    @Test
+    public void registrationExistedUserTest() {
+        type("#FirstName", "Ivan");
+        type("#LastName", "Ivanov");
+        type("#Email", "qq123@qq.qq");
+        type("#Password", "Pass@1234");
+        type("#ConfirmPassword", "Pass@1234");
+        click(By.cssSelector("#register-button"));
 
         Assert.assertTrue(isElementPresent(By.xpath("//li[contains(text(),'The specified email already exists')]")));
 
     }
+
+
 }

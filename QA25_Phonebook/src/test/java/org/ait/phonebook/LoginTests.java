@@ -1,11 +1,12 @@
 package org.ait.phonebook;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class CreateAccountTests extends TestBase {
+public class LoginTests extends TestBase {
     @BeforeMethod
     public void ensurePrecondition() {
         if (!isLoginLinkPresent()) {
@@ -13,19 +14,20 @@ public class CreateAccountTests extends TestBase {
         }
         clickOnLoginLink();
     }
-
     @AfterMethod()
     public void tierDown() {
         super.tierDown();
     }
 
-
     @Test
-    public void existedUserRegistrationNegativeTest() {
-
+    public void loginPositiveTest(){
         fillingLoginRegistrationForm("qq@qq.qq", "Pass@1234");
-        clickOnRegistrationButton();
-        Assert.assertTrue(isAllertPresent());
+        click(By.xpath("//button[.='Login']"));
+        Assert.assertTrue(isElementPresent2(By.xpath("//button[contains(.,'Sign Out')]")));
+
     }
+
+
+
 
 }
