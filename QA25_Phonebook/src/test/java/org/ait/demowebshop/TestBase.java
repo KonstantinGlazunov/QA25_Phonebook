@@ -10,8 +10,10 @@ import org.testng.annotations.BeforeMethod;
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
+
     WebDriver driver;
-    String FIRST_PRODUCT_TITLE = ".product-item:first-of-type img[src]:first-of-type";
+    String FIRST_PRODUCT_SELECTOR = ".product-item:first-of-type img[src]:first-of-type";
+    public static final String ADD_TO_CART_BUTTON_SELECTOR = "#add-to-cart-button-2";
 
     @BeforeMethod
     public void setUp() {

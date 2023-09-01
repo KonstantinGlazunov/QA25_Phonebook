@@ -20,10 +20,10 @@ public class AddProductsInCartTests extends TestBase {
     @Test
     public void positiveAddProductBookInCart() {
 
-        click(By.cssSelector(FIRST_PRODUCT_TITLE));
+        click(By.cssSelector(FIRST_PRODUCT_SELECTOR));
         String productNameOnProductPage = getProductNameOnProductPage();
         fillInputsCaseGiftCard();
-        click(By.cssSelector("#add-to-cart-button-2"));
+        click(By.cssSelector(ADD_TO_CART_BUTTON_SELECTOR));
         toShopingCart();
         boolean isProductInCart = isElementPresent(By.xpath("//td[@class='product']/a[text()='" +
                 productNameOnProductPage +
